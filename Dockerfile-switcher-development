@@ -1,0 +1,16 @@
+from golang:1.21-bullseye
+
+workdir /monorepo_root/switcher
+
+ENV GO111MODULE=on \
+    CGO_ENABLED=0
+
+
+run go install github.com/githubnemo/CompileDaemon@v1.4.0
+
+
+# restart Go process on save to make development more productive
+ENTRYPOINT CompileDaemon \
+    -directory="/monorepo_root/switcher" \
+    -build="go build -o main -buildvcs=false ." \
+    -command="./main"

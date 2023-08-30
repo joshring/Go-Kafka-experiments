@@ -1,0 +1,13 @@
+from golang:1.21-bullseye
+
+workdir /monorepo_root/counter_manager
+
+ENV GO111MODULE=on \
+    CGO_ENABLED=0
+
+# restart Go process on save to make development more productive
+run go install github.com/githubnemo/CompileDaemon@v1.4.0
+ENTRYPOINT CompileDaemon \
+    -directory="/monorepo_root/counter_manager" \
+    -build="go build -o main -buildvcs=false ." \
+    -command="./main"
