@@ -1,4 +1,4 @@
-# Josh Ring's Technical Submission
+# Go-Kafka-experiments
 
 ## To run: 
 1. docker compose up
